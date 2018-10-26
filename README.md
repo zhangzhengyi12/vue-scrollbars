@@ -42,6 +42,7 @@ export default {
 ## Props
 
 | name | type | desc | default |
+|-----|-----|-----|-----|
 | autoHide | Boolean | auto hide scrollbar | false |
 | hideTime | Boolean | auto Hide Time | 1000 |
 | data | Array | on watch Data Change refresh Bar| |
@@ -49,6 +50,7 @@ export default {
 ## APIS
 
 | name | params | desc |
+|-----|-----|-----|
 | refresh() | null | refersh scrollbar|
 
 > this.$refs.scrollbars.refresh()
