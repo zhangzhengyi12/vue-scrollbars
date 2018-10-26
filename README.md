@@ -5,25 +5,35 @@
 
 ## DEMO
 
-TBD
+[live-demo](http://yinode.tech/vue-scrollbars/)
 
 ## How to use
 
-> npm i zhangzhengyi@vue-scrollbars --svae
+```bash
+npm i zhangzhengyi@vue-scrollbars --svae
+```
 
 global regisiter
 
-> import Vue from 'vue'
-> import Scrollerbars from 'zhangzhengyi12@vue-scrollbars'
-> Vue.use(Scrollerbars)
+```js
+import Vue from 'vue'
+import Scrollerbars from 'zhangzhengyi12@vue-scrollbars'
+Vue.use(Scrollerbars)
+```
 
 OR in component
 
-> import Scrollerbars from 'zhangzhengyi12@vue-scrollbars
-> components:{Scrollerbars}
+```js
+import Scrollerbars from 'zhangzhengyi12@vue-scrollbars'
 
+// in vue component
 
-```html
+export default {
+  components: { Scrollerbars }
+}
+```
+
+```xml
 <scrollbars style="height:200px" autoHide>
   <!-- you content -->
 </scrollerbars>
@@ -34,7 +44,7 @@ OR in component
 | name | type | desc | default |
 | autoHide | Boolean | auto hide scrollbar | false |
 | hideTime | Boolean | auto Hide Time | 1000 |
-| data | Array | on watch Data Change refresh Bar|  |
+| data | Array | on watch Data Change refresh Bar| |
 
 ## APIS
 
@@ -47,9 +57,3 @@ OR in component
 
 - scroll event listen
 - shortcut scroll API
-
-
-
-
-
-
