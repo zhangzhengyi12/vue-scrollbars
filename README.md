@@ -10,7 +10,7 @@
 ## How to use
 
 ```bash
-npm i zhangzhengyi@vue-scrollbars --svae
+npm i zhangzhengyi12@vue-scrollbars --svae
 ```
 
 global regisiter
