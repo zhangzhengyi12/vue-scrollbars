@@ -3,7 +3,7 @@
     <div class="content-wrapper" ref="slot" @scroll="onScrollHandle">
       <slot></slot>
     </div>
-    <div class="y-bar-outer bar" ref="ybar" @mouseenter="showBar" @mouseleave="hideBar">
+    <div class="y-bar-outer bar" ref="ybar" @mouseenter="showBar" @mouseleave="yLeaveHandle">
       <div
         class="inner"
         @mousedown="yMouseDownHandle"
@@ -12,7 +12,7 @@
         :style="`height:${yBarHeight}px;opacity:${yBarOpa};transform:translateY(${yInnerTop}px)`"
       ></div>
     </div>
-    <div class="x-bar-outer bar" ref="xbar" @mouseenter="showBar" @mouseleave="hideBar">
+    <div class="x-bar-outer bar" ref="xbar" @mouseenter="showBar" @mouseleave="xLeaveHandle">
       <div
         class="inner"
         @mousedown="xMouseDownHandle"
@@ -110,7 +110,12 @@ export default {
     this.refresh()
     // 注册节流函数
     this.debounceHide = debounce(() => {
-      this.hideBar()
+      // 放置在此处的判断是个妥协
+      // 尽管会可读性 但是这个判断过于重要 几乎所有地方都需要达成条件才触发自动隐藏
+      // 并且在外部判断 由于延时的特性会导致一些同步问题
+      if (this.autoHide && !this.move.xMouseDown && !this.move.yMouseDown) {
+        this.hideBar()
+      }
     }, this.hideTime)
     // 提示用户可以滚动
     if (this.autoHide) {
@@ -139,6 +144,7 @@ export default {
       }
     },
     reGetInfo() {
+      // 获取基本的宽高信息
       this.info.wrapperHeight = this.$refs.wrapper.clientHeight
       this.info.wrapperWidth = this.$refs.wrapper.clientWidth
       this.info.contentHeight = this.$refs.slot.children[0].clientHeight
@@ -148,10 +154,8 @@ export default {
     },
     onScrollHandle(e) {
       // 自动隐藏
-      if (this.autoHide) {
-        this.showBar()
-        this.debounceHide()
-      }
+      this.showBar()
+      this.debounceHide()
       const yScrollPercent = this.$refs.slot.scrollTop / this.info.contentHeight
       this.yInnerTop = this.info.yBarHeight * yScrollPercent
       const xScrollPercent = this.$refs.slot.scrollLeft / this.info.contentWidth
@@ -169,8 +173,10 @@ export default {
     yMouseDownHandle(e) {
       this.move.yMouseDown = true
       this.move.yMouseDownOffset = e.screenY
+      this.showBar()
       const moveHandle = e => {
         e.preventDefault()
+        // 计算出Y轴偏移和缩放比例 让content进行滚动
         let offsetY = e.screenY - this.move.yMouseDownOffset
         this.move.yMouseDownOffset = e.screenY
         let scale = this.info.contentHeight / this.info.yBarHeight
@@ -179,15 +185,20 @@ export default {
       }
       document.addEventListener('mousemove', moveHandle)
       document.addEventListener('mouseup', e => {
+        // 清除监听 重设默认值
+        // 自动隐藏
         document.removeEventListener('mousemove', moveHandle)
         this.move.yMouseDown = false
         this.move.yMouseDownOffset = 0
+        this.debounceHide()
       })
     },
     xMouseDownHandle(e) {
       this.move.xMouseDown = true
       this.move.xMouseDownOffset = e.screenX
+      this.showBar()
       const moveHandle = e => {
+        // 计算出X轴偏移和缩放比例 让content进行滚动
         e.preventDefault()
         let offsetX = e.screenX - this.move.xMouseDownOffset
         this.move.xMouseDownOffset = e.screenX
@@ -198,9 +209,22 @@ export default {
       document.addEventListener('mousemove', moveHandle)
       document.addEventListener('mouseup', e => {
         document.removeEventListener('mousemove', moveHandle)
+        // 清除监听 重设默认值
+        // 自动隐藏
         this.move.xMouseDown = false
         this.move.xMouseDownOffset = 0
+        this.debounceHide()
       })
+    },
+    xLeaveHandle() {
+      if (!this.move.xMouseDown) {
+        this.debounceHide()
+      }
+    },
+    yLeaveHandle() {
+      if (!this.move.yMouseDown) {
+        this.debounceHide()
+      }
     }
   },
   watch: {
