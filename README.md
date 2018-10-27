@@ -10,21 +10,21 @@
 ## How to use
 
 ```bash
-npm i zhangzhengyi12@vue-scrollbars --svae
+sudo npm i @zhangzhengyi12/vue-scrollbars --svae
 ```
 
 global regisiter
 
 ```js
 import Vue from 'vue'
-import Scrollerbars from 'zhangzhengyi12@vue-scrollbars'
+import Scrollerbars from '@zhangzhengyi12/vue-scrollbars'
 Vue.use(Scrollerbars)
 ```
 
 OR in component
 
 ```js
-import Scrollerbars from 'zhangzhengyi12@vue-scrollbars'
+import Scrollerbars from '@zhangzhengyi12/vue-scrollbars'
 
 // in vue component
 
@@ -41,17 +41,17 @@ export default {
 
 ## Props
 
-| name | type | desc | default |
-|-----|-----|-----|-----|
-| autoHide | Boolean | auto hide scrollbar | false |
-| hideTime | Boolean | auto Hide Time | 1000 |
-| data | Array | on watch Data Change refresh Bar| |
+| name     | type    | desc                             | default |
+| -------- | ------- | -------------------------------- | ------- |
+| autoHide | Boolean | auto hide scrollbar              | false   |
+| hideTime | Boolean | auto Hide Time                   | 1000    |
+| data     | Array   | on watch Data Change refresh Bar |         |
 
 ## APIS
 
-| name | params | desc |
-|-----|-----|-----|
-| refresh() | null | refersh scrollbar|
+| name      | params | desc              |
+| --------- | ------ | ----------------- |
+| refresh() | null   | refersh scrollbar |
 
 > this.$refs.scrollbars.refresh()
 
