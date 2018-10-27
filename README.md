@@ -1,11 +1,20 @@
 # vue-scrollbars
 
+
+![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg)  ![Github file size](https://img.shields.io/badge/size-10kb-brightgreen.svg)
+![npm](https://img.shields.io/badge/npm-6.4.1-red.svg)
+![node.js](https://img.shields.io/badge/node.js-v10.9.0-blue.svg)
+
+
+
 > 基于 Vue 的 PC 端滚动组件 简单 轻量 高效
-> 仅对原生滚动组件进行滚动条样式统一化处理，并添加自动隐藏等常用功能
+> 仅对原生滚动组件进行滚动条样式统一化处理，并添加自动隐藏,拖动滚动等常用功能
 
 ## DEMO
 
 [live-demo](http://yinode.tech/vue-scrollbars/)
+
+使用示例请看 app.vue
 
 ## How to use
 
@@ -41,11 +50,12 @@ export default {
 
 ## Props
 
-| name     | type    | desc                             | default |
-| -------- | ------- | -------------------------------- | ------- |
-| autoHide | Boolean | auto hide scrollbar              | false   |
-| hideTime | Boolean | auto Hide Time                   | 1000    |
-| data     | Array   | on watch Data Change refresh Bar |         |
+| name       | type    | desc                             | default |
+| ---------- | ------- | -------------------------------- | ------- |
+| autoHide   | Boolean | auto hide scrollbar              | false   |
+| hideTime   | Boolean | auto Hide Time                   | 1000    |
+| data       | Array   | on watch Data Change refresh Bar |         |
+| displayBar | Boolen  | display scrollbar                | true    |
 
 ## APIS
 
@@ -55,7 +65,8 @@ export default {
 
 > this.$refs.scrollbars.refresh()
 
-## TODO
+## Event
 
-- scroll event listen
-- shortcut scroll API
+| name    | params              | desc                |
+| ------- | ------------------- | ------------------- |
+| @scroll | scroll event object | native scroll Event |

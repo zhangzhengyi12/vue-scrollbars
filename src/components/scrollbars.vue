@@ -3,11 +3,23 @@
     <div class="content-wrapper" ref="slot" @scroll="onScrollHandle">
       <slot></slot>
     </div>
-    <div class="y-bar-outer" ref="ybar">
-      <div class="inner" :style="`height:${yBarHeight}px;opacity:${yBarOpa};transform:translateY(${yInnerTop}px)`"></div>
+    <div class="y-bar-outer bar" ref="ybar" @mouseenter="showBar" @mouseleave="hideBar">
+      <div
+        class="inner"
+        @mousedown="yMouseDownHandle"
+        v-if="displayBar"
+        :class="{move:move.yMouseDown}"
+        :style="`height:${yBarHeight}px;opacity:${yBarOpa};transform:translateY(${yInnerTop}px)`"
+      ></div>
     </div>
-    <div class="x-bar-outer" ref="xbar">
-      <div class="inner" :style="`width:${xBarWidth}px;opacity:${xBarOpa};transform:translateX(${xInnerLeft}px)`"></div>
+    <div class="x-bar-outer bar" ref="xbar" @mouseenter="showBar" @mouseleave="hideBar">
+      <div
+        class="inner"
+        @mousedown="xMouseDownHandle"
+        v-if="displayBar"
+        :class="{move:move.xMouseDown}"
+        :style="`width:${xBarWidth}px;opacity:${xBarOpa};transform:translateX(${xInnerLeft}px)`"
+      ></div>
     </div>
   </div>
 </template>
@@ -55,13 +67,17 @@ export default {
     },
     hideTime: {
       type: Number,
-      default: 500
+      default: 1000
     },
     data: {
       type: Array,
       default: function() {
         return []
       }
+    },
+    displayBar: {
+      type: Boolean,
+      default: true
     }
   },
   name: 'scrollbars',
@@ -81,6 +97,12 @@ export default {
         contentHeight: 0,
         yBarHeight: 0,
         xBarWdith: 0
+      },
+      move: {
+        yMouseDown: false,
+        yMouseDownOffset: 0,
+        xMouseDown: false,
+        xMouseOffset: 0
       }
     }
   },
@@ -90,12 +112,17 @@ export default {
     this.debounceHide = debounce(() => {
       this.hideBar()
     }, this.hideTime)
+    // 提示用户可以滚动
+    if (this.autoHide) {
+      this.showBar()
+      this.debounceHide()
+    }
   },
   methods: {
     refresh() {
       this.reGetInfo()
       // y-bar
-      if (this.info.contentHeight <= this.info.wrapperHeight) {
+      if (this.info.contentHeight <= this.info.wrapperHeight + 1) {
         this.yBarHeight = 0
       } else {
         this.yBarHeight =
@@ -103,7 +130,7 @@ export default {
           this.info.yBarHeight
       }
       // x-bar
-      if (this.info.contentWidth <= this.info.wrapperWidth) {
+      if (this.info.contentWidth <= this.info.wrapperWidth + 1) {
         this.xBarWidth = 0
       } else {
         this.xBarWidth =
@@ -129,6 +156,7 @@ export default {
       this.yInnerTop = this.info.yBarHeight * yScrollPercent
       const xScrollPercent = this.$refs.slot.scrollLeft / this.info.contentWidth
       this.xInnerLeft = this.info.xBarWdith * xScrollPercent
+      this.$emit('scroll', e)
     },
     showBar() {
       this.yBarOpa = 1
@@ -137,6 +165,42 @@ export default {
     hideBar() {
       this.yBarOpa = 0
       this.xBarOpa = 0
+    },
+    yMouseDownHandle(e) {
+      this.move.yMouseDown = true
+      this.move.yMouseDownOffset = e.screenY
+      const moveHandle = e => {
+        e.preventDefault()
+        let offsetY = e.screenY - this.move.yMouseDownOffset
+        this.move.yMouseDownOffset = e.screenY
+        let scale = this.info.contentHeight / this.info.yBarHeight
+        let contentOffset = offsetY * scale
+        this.$refs.slot.scrollTop += contentOffset
+      }
+      document.addEventListener('mousemove', moveHandle)
+      document.addEventListener('mouseup', e => {
+        document.removeEventListener('mousemove', moveHandle)
+        this.move.yMouseDown = false
+        this.move.yMouseDownOffset = 0
+      })
+    },
+    xMouseDownHandle(e) {
+      this.move.xMouseDown = true
+      this.move.xMouseDownOffset = e.screenX
+      const moveHandle = e => {
+        e.preventDefault()
+        let offsetX = e.screenX - this.move.xMouseDownOffset
+        this.move.xMouseDownOffset = e.screenX
+        let scale = this.info.contentWidth / this.info.xBarWdith
+        let contentOffset = offsetX * scale
+        this.$refs.slot.scrollLeft += contentOffset
+      }
+      document.addEventListener('mousemove', moveHandle)
+      document.addEventListener('mouseup', e => {
+        document.removeEventListener('mousemove', moveHandle)
+        this.move.xMouseDown = false
+        this.move.xMouseDownOffset = 0
+      })
     }
   },
   watch: {
@@ -195,4 +259,10 @@ export default {
       background-color rgba(0, 0, 0, 0.2)
       width 0px
       transition opacity 200ms ease 0s
+  .bar
+    >.inner
+      &:hover
+        background-color rgba(0, 0, 0, 0.3)
+      &.move
+        background-color rgba(0, 0, 0, 0.3)
 </style>

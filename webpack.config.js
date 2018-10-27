@@ -8,11 +8,23 @@ const enteyMap = {
   demo: './src/main.js'
 }
 
+const pathMap = {
+  production: './dist',
+  development: './demo',
+  demo: './demo'
+}
+
+const publicMap = {
+  production: '/dist/',
+  development: '/demo/',
+  demo: '/demo/'
+}
+
 module.exports = {
   entry: enteyMap[NODE_ENV],
   output: {
-    path: path.resolve(__dirname, NODE_ENV === 'demo' ? './demo' : './dist'),
-    publicPath: NODE_ENV === 'demo' ? './' : '/dist/',
+    path: path.resolve(__dirname, pathMap[NODE_ENV]),
+    publicPath: publicMap[NODE_ENV],
     filename: 'vue-scrollbars.js',
     library: 'vue-scrollbars',
     libraryTarget: 'umd',

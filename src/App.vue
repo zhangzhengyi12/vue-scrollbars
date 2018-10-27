@@ -27,7 +27,7 @@
     <h1 class="title">Vue-Scrollbars</h1>
     <div class="hor demo">
       <h2 class="title">Horizontal scrolling</h2>
-      <scrollbars style="height:200px;width:90vw;margin:0 auto" autoHide>
+      <scrollbars style="height:200px;width:90vw;margin:0 auto" @scroll="onScroll">
         <div class="inner" style="width:300vw;height:200px">
           当初他们告诉我要说点大话
           努力地秀优越和所有人都不一样
@@ -119,7 +119,7 @@
       </scrollbars>
     </div>
     <div class="hor demo">
-      <h2 class="title">Vertical scrolling</h2>
+      <h2 class="title">Vertical scrolling autoHide</h2>
       <scrollbars style="height:200px;width:90vw;margin:0 auto" autoHide>
         <div class="inner" style="width:90vw;height:1000px">
           当初他们告诉我要说点大话
@@ -212,7 +212,7 @@
       </scrollbars>
     </div>
     <div class="free demo">
-      <h2 class="title">Free scrolling</h2>
+      <h2 class="title">Free scrolling autoHide</h2>
       <scrollbars style="height:200px;width:90vw;margin:0 auto" autoHide>
         <div class="inner" style="width:300vw;height:1000px">
           当初他们告诉我要说点大话
