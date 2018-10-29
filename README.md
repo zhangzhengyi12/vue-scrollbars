@@ -10,6 +10,12 @@
 > 基于 Vue 的 PC 端滚动组件 简单 轻量 高效
 > 仅对原生滚动组件进行滚动条样式统一化处理，并添加自动隐藏,拖动滚动等常用功能
 
+## github
+
+[github](https://github.com/zhangzhengyi12/vue-scrollbars)
+
+if you like , click star , thanks!
+
 ## DEMO
 
 [live-demo](http://yinode.tech/vue-scrollbars/)
