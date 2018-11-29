@@ -85,7 +85,7 @@ export default {
     },
     scrollBottomHeight: {
       type: Number,
-      default: 50
+      default: () => {}
     }
   },
   name: "scrollbars",
