@@ -80,12 +80,12 @@ export default {
       default: true
     },
     listenScrollBottom: {
-      type: Function,
+      type: [Function, Boolean],
       default: false
     },
     scrollBottomHeight: {
       type: Number,
-      default: () => {}
+      default: 50
     }
   },
   name: "scrollbars",
