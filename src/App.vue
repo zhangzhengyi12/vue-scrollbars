@@ -27,7 +27,7 @@
     <h1 class="title">Vue-Scrollbars</h1>
     <div class="hor demo">
       <h2 class="title">Horizontal scrolling</h2>
-      <scrollbars style="height:200px;width:90vw;margin:0 auto" >
+      <scrollbars style="height:200px;width:90vw;margin:0 auto">
         <div class="inner" style="width:300vw;height:200px">
           当初他们告诉我要说点大话
           努力地秀优越和所有人都不一样
@@ -120,7 +120,7 @@
     </div>
     <div class="hor demo">
       <h2 class="title">Vertical scrolling autoHide</h2>
-      <scrollbars style="height:200px;width:90vw;margin:0 auto" autoHide>
+      <scrollbars style="height:200px;width:90vw;margin:0 auto" autoHide :listenScrollBottom="toBotHandle">
         <div class="inner" style="width:90vw;height:1000px">
           当初他们告诉我要说点大话
           努力地秀优越和所有人都不一样
@@ -308,18 +308,23 @@
 </template>
 
 <script>
-import Scrollbars from './components/scrollbars'
+import Scrollbars from "./components/scrollbars";
 export default {
-  name: 'app',
+  name: "app",
   components: {
     Scrollbars
+  },
+  methods: {
+    toBotHandle(h) {
+      alert("to bottom");
+    }
   }
-}
+};
 </script>
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
