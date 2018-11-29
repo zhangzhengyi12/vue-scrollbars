@@ -3,7 +3,7 @@
   "description": " 基于 Vue 的 PC 端滚动组件 简单 轻量 高效",
   "version": "1.4.4",
   "author": "zhangzhengyi12@live.com",
-  "license": "",
+  "license": "MIT",
   "private": false,
   "main": "dist/vue-scrollbars.js",
   "scripts": {
