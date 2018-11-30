@@ -53,14 +53,16 @@ export default {
 
 ## Props
 
-| name               | type     | desc                                      | default    |
-| ------------------ | -------- | ----------------------------------------- | ---------- |
-| autoHide           | Boolean  | auto hide scrollbar                       | false      |
-| hideTime           | Boolean  | auto Hide Time                            | 1000       |
-| data               | Array    | on watch Data Change refresh Bar          |            |
-| displayBar         | Boolen   | display scrollbar                         | true       |
-| listenScrollBottom | Function | Called when scrolling to the bottom       | false      |
-| scrollBottomHeight | Number   | listenScrollBottom handler Trigger height | empty func |
+| name               | type     | desc                                      | default |
+| ------------------ | -------- | ----------------------------------------- | ------- |
+| autoHide           | Boolean  | auto hide scrollbar                       | false   |
+| hideTime           | Boolean  | auto Hide Time                            | 1000    |
+| data               | Array    | on watch Data Change refresh Bar          | []      |
+| displayBar         | Boolen   | display scrollbar                         | true    |
+| listenScrollBottom | Function | Called when scrolling to the bottom       | false   |
+| scrollBottomHeight | Number   | listenScrollBottom handler trigger height | 50      |
+| listenScrollRight  | Function | Called when scrolling to the right        | false   |
+| scrollBottomHeight | Number   | listenScrollRight handler trigger height  | 50      |
 
 ## APIS
 

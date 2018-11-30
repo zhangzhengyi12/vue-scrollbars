@@ -26,8 +26,8 @@
     </div>
     <h1 class="title">Vue-Scrollbars</h1>
     <div class="hor demo">
-      <h2 class="title">Horizontal scrolling</h2>
-      <scrollbars style="height:200px;width:90vw;margin:0 auto">
+      <h2 class="title">Horizontal scrolling (listen scroll to right)</h2>
+      <scrollbars style="height:200px;width:90vw;margin:0 auto" :listenScrollRight="toRightHandle">
         <div class="inner" style="width:300vw;height:200px">
           当初他们告诉我要说点大话
           努力地秀优越和所有人都不一样
@@ -119,7 +119,7 @@
       </scrollbars>
     </div>
     <div class="hor demo">
-      <h2 class="title">Vertical scrolling autoHide</h2>
+      <h2 class="title">Vertical scrolling autoHide (listen scroll to bottom)</h2>
       <scrollbars style="height:200px;width:90vw;margin:0 auto" autoHide :listenScrollBottom="toBotHandle">
         <div class="inner" style="width:90vw;height:1000px">
           当初他们告诉我要说点大话
@@ -316,7 +316,18 @@ export default {
   },
   methods: {
     toBotHandle(h) {
+      if (this.loadb) {
+        return;
+      }
+      this.loadb = true;
       alert("to bottom");
+    },
+    toRightHandle(w) {
+      if (this.loadr) {
+        return;
+      }
+      this.loadr = true;
+      alert("to right");
     }
   }
 };

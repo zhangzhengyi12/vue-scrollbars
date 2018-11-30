@@ -86,6 +86,14 @@ export default {
     scrollBottomHeight: {
       type: Number,
       default: 50
+    },
+    listenScrollRight: {
+      type: [Function, Boolean],
+      default: false
+    },
+    scrollRightWidth: {
+      type: Number,
+      default: 50
     }
   },
   name: "scrollbars",
@@ -179,6 +187,16 @@ export default {
           this.$refs.slot.scrollTop;
         if (bottomHeight <= this.scrollBottomHeight) {
           this.listenScrollBottom(bottomHeight);
+        }
+      }
+      // 监听滚动到右侧（横向滚动）
+      if (this.listenScrollRight) {
+        const rightWidth =
+          this.info.contentWidth -
+          this.info.wrapperWidth -
+          this.$refs.slot.scrollLeft;
+        if (rightWidth <= this.scrollRightWidth) {
+          this.listenScrollRight(rightWidth);
         }
       }
     },
