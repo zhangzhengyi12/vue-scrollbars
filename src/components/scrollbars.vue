@@ -70,7 +70,7 @@ export default {
       default: 1000
     },
     data: {
-      type: Array,
+      type: [Array, String, Object, Number],
       default: function() {
         return [];
       }
