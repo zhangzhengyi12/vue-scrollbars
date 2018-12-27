@@ -89,3 +89,8 @@ The principle of understanding this component here is to use the container's Ove
 **所以我加入了一个动态检测滚动条宽度的功能，能够让滚动条自动适应你的设备**
 
 **So I added a feature that dynamically detects the width of the scrollbar, allowing the scrollbar to automatically adapt to your device.**
+
+
+## 自定义
+
+考虑再三还是还是没有加入 bar 的颜色等常用 Props, 如有需要，请使用样式优先级进行覆盖。
