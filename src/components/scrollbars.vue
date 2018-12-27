@@ -59,6 +59,8 @@ const debounce = function(func, wait, immediate) {
   };
 };
 
+import { getScrollBarSize } from "../util/util.js";
+
 export default {
   props: {
     autoHide: {
@@ -141,6 +143,7 @@ export default {
   },
   methods: {
     refresh() {
+      this.setContentOffset();
       this.reGetInfo();
       // y-bar
       if (this.info.contentHeight <= this.info.wrapperHeight + 1) {
@@ -158,6 +161,12 @@ export default {
           (this.info.wrapperWidth / this.info.contentWidth) *
           this.info.xBarWdith;
       }
+    },
+    setContentOffset() {
+      // 获取该设备的默认滚动条宽度 依赖这个宽度把滚动条顶出去
+      let scrollBarWidth = getScrollBarSize();
+      this.$refs.slot.style.marginRight = `-${scrollBarWidth}px`;
+      this.$refs.slot.style.marginBottom = `-${scrollBarWidth}px`;
     },
     reGetInfo() {
       // 获取基本的宽高信息

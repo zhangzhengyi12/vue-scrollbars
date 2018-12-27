@@ -77,3 +77,12 @@ export default {
 | name    | params              | desc                |
 | ------- | ------------------- | ------------------- |
 | @scroll | scroll event object | native scroll Event |
+
+
+## 特性
+
+### 自动监测滚动条
+
+这里了解这个组件的原理是利用 容器的 Overflow:hidden 属性 ，随后将 content 设置一个负的 marigin-bottom & margin-right 把滚动条顶出容器 已达到隐藏的效果 （一般来说这个值就是滚动条的宽度），但是在不同平台的不同设备上，这个宽度是不一致的，在我的 mbp15 inch 上 这个值是15像素，而在一台 windows 分辨率1920*1080 的设备上，这个宽度为17
+
+**所以我加入了一个动态检测滚动条宽度的功能，能够让滚动条自动适应你的设备**
