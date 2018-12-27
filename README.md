@@ -5,7 +5,7 @@
 ![node.js](https://img.shields.io/badge/node.js-v10.9.0-blue.svg)
 
 > 基于 Vue 的 PC 端滚动组件 简单 轻量 高效
-> 仅对原生滚动组件进行滚动条样式统一化处理，并添加自动隐藏,拖动滚动等常用功能
+> 仅对原生滚动组件进行滚动条样式统一化处理，并添加自动隐藏,拖动滚动等常用功能，利用动态滚动宽度监测来填平平台之间的差异
 
 ## github
 
@@ -78,11 +78,14 @@ export default {
 | ------- | ------------------- | ------------------- |
 | @scroll | scroll event object | native scroll Event |
 
-
 ## 特性
 
 ### 自动监测滚动条
 
-这里了解这个组件的原理是利用 容器的 Overflow:hidden 属性 ，随后将 content 设置一个负的 marigin-bottom & margin-right 把滚动条顶出容器 已达到隐藏的效果 （一般来说这个值就是滚动条的宽度），但是在不同平台的不同设备上，这个宽度是不一致的，在我的 mbp15 inch 上 这个值是15像素，而在一台 windows 分辨率1920*1080 的设备上，这个宽度为17
+这里了解这个组件的原理是利用 容器的 Overflow:hidden 属性 ，随后将 content 设置一个负的 marigin-bottom & margin-right 把滚动条顶出容器 已达到隐藏的效果 （一般来说这个值就是滚动条的宽度），但是在不同平台的不同设备上，这个宽度是不一致的，在我的 mbp15 inch 上 这个值是 15 像素，而在一台 windows 分辨率 1920\*1080 的设备上，这个宽度为 17
+
+The principle of understanding this component here is to use the container's Overflow:hidden property, and then set the content to a negative marigin-bottom & margin-right. The scroll bar is pushed out of the container to achieve a hidden effect (generally this value is the scroll bar) Width), but this width is inconsistent on different devices on different platforms. This value is 15 pixels on my mbp15 inch, and on a 1920\*1080 windows resolution, this width is 17
 
 **所以我加入了一个动态检测滚动条宽度的功能，能够让滚动条自动适应你的设备**
+
+**So I added a feature that dynamically detects the width of the scrollbar, allowing the scrollbar to automatically adapt to your device.**
