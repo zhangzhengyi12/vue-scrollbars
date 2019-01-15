@@ -1,7 +1,7 @@
 {
   "name": "@zhangzhengyi12/vue-scrollbars",
   "description": " 基于 Vue 的 PC 端滚动组件 简单 轻量 高效",
-  "version": "1.6.8",
+  "version": "1.6.9",
   "author": "zhangzhengyi12@live.com",
   "license": "MIT",
   "private": false,

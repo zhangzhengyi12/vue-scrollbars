@@ -181,19 +181,17 @@ export default {
       // 自动隐藏
       this.showBar();
       this.debounceHide();
-      const yScrollPercent =
-        this.$refs.slot.scrollTop / this.info.contentHeight;
+      const slotScrollTop = this.$refs.slot.scrollTop;
+      const slotScrollLeft = this.$refs.slot.scrollLeft;
+      const yScrollPercent = slotScrollTop / this.info.contentHeight;
       this.yInnerTop = this.info.yBarHeight * yScrollPercent;
-      const xScrollPercent =
-        this.$refs.slot.scrollLeft / this.info.contentWidth;
+      const xScrollPercent = slotScrollLeft / this.info.contentWidth;
       this.xInnerLeft = this.info.xBarWdith * xScrollPercent;
       this.$emit("scroll", e);
       // 监听滚动到底部
       if (this.listenScrollBottom) {
         const bottomHeight =
-          this.info.contentHeight -
-          this.info.wrapperHeight -
-          this.$refs.slot.scrollTop;
+          this.info.contentHeight - this.info.wrapperHeight - slotScrollTop;
         if (bottomHeight <= this.scrollBottomHeight) {
           this.listenScrollBottom(bottomHeight);
         }
@@ -201,9 +199,7 @@ export default {
       // 监听滚动到右侧（横向滚动）
       if (this.listenScrollRight) {
         const rightWidth =
-          this.info.contentWidth -
-          this.info.wrapperWidth -
-          this.$refs.slot.scrollLeft;
+          this.info.contentWidth - this.info.wrapperWidth - slotScrollLeft;
         if (rightWidth <= this.scrollRightWidth) {
           this.listenScrollRight(rightWidth);
         }
@@ -218,14 +214,16 @@ export default {
       this.xBarOpa = 0;
     },
     yMouseDownHandle(e) {
+      const eventScreenY = e.screenY;
       this.move.yMouseDown = true;
-      this.move.yMouseDownOffset = e.screenY;
+      this.move.yMouseDownOffset = eventScreenY;
       this.showBar();
       const moveHandle = e => {
         e.preventDefault();
         // 计算出Y轴偏移和缩放比例 让content进行滚动
-        let offsetY = e.screenY - this.move.yMouseDownOffset;
-        this.move.yMouseDownOffset = e.screenY;
+        const moveScreenY = e.screenY;
+        let offsetY = moveScreenY - this.move.yMouseDownOffset;
+        this.move.yMouseDownOffset = moveScreenY;
         let scale = this.info.contentHeight / this.info.yBarHeight;
         let contentOffset = offsetY * scale;
         this.$refs.slot.scrollTop += contentOffset;
@@ -241,14 +239,16 @@ export default {
       });
     },
     xMouseDownHandle(e) {
+      const eventScreenX = e.screenX;
       this.move.xMouseDown = true;
-      this.move.xMouseDownOffset = e.screenX;
+      this.move.xMouseDownOffset = eventScreenX;
       this.showBar();
       const moveHandle = e => {
         // 计算出X轴偏移和缩放比例 让content进行滚动
         e.preventDefault();
-        let offsetX = e.screenX - this.move.xMouseDownOffset;
-        this.move.xMouseDownOffset = e.screenX;
+        const moveScreenX = e.screenX;
+        let offsetX = moveScreenX - this.move.xMouseDownOffset;
+        this.move.xMouseDownOffset = moveScreenX;
         let scale = this.info.contentWidth / this.info.xBarWdith;
         let contentOffset = offsetX * scale;
         this.$refs.slot.scrollLeft += contentOffset;
