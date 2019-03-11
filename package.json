@@ -7,7 +7,7 @@
   "private": false,
   "main": "dist/vue-scrollbars.js",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot  --port 8080 --host 0.0.0.0",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "demo": "cross-env NODE_ENV=demo webpack --progress --hide-modules"
   },

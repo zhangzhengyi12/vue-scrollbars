@@ -94,3 +94,7 @@ The principle of understanding this component here is to use the container's Ove
 ## 自定义
 
 考虑再三还是还是没有加入 bar 的颜色等常用 Props, 如有需要，请使用样式优先级进行覆盖。
+
+## issues相关
+
+麻烦报告问题的老哥多给点信息 最起码浏览器版本给写上 不然我没法定位啊
