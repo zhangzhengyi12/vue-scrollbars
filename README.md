@@ -15,7 +15,7 @@ if you like , click star , thanks!
 
 ## DEMO
 
-[live-demo](http://zhangzhengyi12@github.io/vue-scrollbars/)
+[live-demo](https://gh.yinode.tech/vue-scrollbars/)
 
 使用示例请看 app.vue
 
